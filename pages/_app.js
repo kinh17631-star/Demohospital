@@ -7,32 +7,30 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <div style={appWrapper}>
-      {/* AnimatePresence ensures smooth exit animations when changing pages */}
-      <AnimatePresence mode="wait">
+      {/* mode="wait" ko hata diya taaki delay kam ho */}
+      <AnimatePresence>
         <motion.div
-          key={router.route} // Router path as key to trigger animation on each page change
+          key={router.route}
           initial="initialState"
           animate="animateState"
           exit="exitState"
           transition={{
-            duration: 0.6,
-            ease: [0.43, 0.13, 0.23, 0.96] // Premium Cubic Bezier timing
+            duration: 0.3, // Speed badha di (0.6 to 0.3)
+            ease: "easeOut" 
           }}
           variants={{
             initialState: {
               opacity: 0,
-              y: 10,
-              filter: "blur(5px)"
+              y: 5 // Subtle movement
+              // Blur hata diya - Yeh hi speed rok raha tha
             },
             animateState: {
               opacity: 1,
-              y: 0,
-              filter: "blur(0px)"
+              y: 0
             },
             exitState: {
               opacity: 0,
-              y: -10,
-              filter: "blur(5px)"
+              y: -5
             },
           }}
         >
@@ -40,7 +38,6 @@ export default function MyApp({ Component, pageProps }) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Global Smooth Scroll Style Hook */}
       <style jsx global>{`
         html {
           scroll-behavior: smooth;
@@ -49,16 +46,16 @@ export default function MyApp({ Component, pageProps }) {
           background-color: #050b14;
           margin: 0;
           padding: 0;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          font-family: 'Inter', -apple-system, system-ui, sans-serif;
           -webkit-font-smoothing: antialiased;
         }
         ::selection {
           background: #4facfe;
           color: #000;
         }
-        /* Custom Scrollbar for Premium Feel */
+        /* Optimized Scrollbar */
         ::-webkit-scrollbar {
-          width: 6px;
+          width: 5px;
         }
         ::-webkit-scrollbar-track {
           background: #050b14;
@@ -76,6 +73,6 @@ export default function MyApp({ Component, pageProps }) {
 }
 
 const appWrapper = {
-  overflowX: "hidden", // Mobile par horizontal scroll issue khatam karne ke liye
+  overflowX: "hidden",
   background: "#050b14"
 };
