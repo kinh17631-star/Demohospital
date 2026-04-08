@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* Mobile par touch karne par jo blue box aata hai, usse hatane ke liye */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -13,104 +12,90 @@
   --accent-cyan: #4facfe;
   --text-main: #ffffff;
   --text-muted: #888888;
-  --glass-bg: rgba(255, 255, 255, 0.03);
+  /* Glass effect ko thoda aur dark kiya taaki bina blur ke bhi premium lage */
+  --glass-bg: rgba(255, 255, 255, 0.05); 
   --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 /* 2. LAYOUT & BODY */
-html, 
-body, 
-#__next {
+html, body, #__next {
   width: 100%;
   min-height: 100vh;
   background-color: var(--bg-dark);
   color: var(--text-main);
-  /* Text ko smoothly render karne ke liye */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* System fonts use kiye hain taaki koi extra font load na ho */
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* 3. CUSTOM TEXT SELECTION (Premium Look) */
+/* 3. CUSTOM SELECTION */
 ::selection {
   background: var(--accent-cyan);
   color: #000;
 }
 
-/* 4. LINKS & INTERACTION */
+/* 4. LINKS & BUTTONS - Optimized Transitions */
 a {
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease-in-out;
+  /* 'all' ki jagah specific properties animate ki hain */
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 button {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s ease;
   cursor: pointer;
   outline: none;
   border: none;
 }
 
-/* Click karne par button thoda dabe (Tactile Feedback) */
 button:active {
   transform: scale(0.96);
 }
 
-/* 5. SMOOTH SCROLLING */
-html {
-  scroll-behavior: smooth;
-}
-
-/* 6. IMAGE FIXES */
+/* 5. IMAGE & INPUT FIXES */
 img {
   max-width: 100%;
   height: auto;
   display: block;
-  /* Image load hote waqt glitch na kare */
-  content-visibility: auto;
+  content-visibility: auto; /* Browsing speed badhane ke liye */
 }
 
-/* 7. PREMIUM DARK SCROLLBAR */
+input, select, textarea {
+  font-size: 16px !important;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 10px;
+  color: #fff;
+}
+
+/* 6. OPTIMIZED SCROLLBAR */
 ::-webkit-scrollbar {
-  width: 6px; /* Patla scrollbar zyada modern lagta hai */
+  width: 5px;
 }
-
-::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-}
-
+::-webkit-scrollbar-track { background: var(--bg-dark); }
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 10px;
-  border: 1px solid var(--bg-dark);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-cyan);
-}
+/* 7. PERFORMANCE UTILITIES */
 
-/* 8. GLOBAL UTILITIES */
+/* Blur hata diya - Ab sirf semi-transparent background rahega */
 .glass-effect {
   background: var(--glass-bg);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   border: 1px solid var(--glass-border);
+  /* backdrop-filter hata diya taaki scroll makkhan chale */
 }
 
 .text-gradient {
   background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-/* 9. INPUT FIXES FOR IOS */
-input, select, textarea {
-  font-size: 16px; /* iOS par auto-zoom rokne ke liye 16px zaroori hai */
-  background: transparent;
-  color: #fff;
 }
