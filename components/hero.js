@@ -90,7 +90,7 @@ const container = {
   position: "relative",
   width: "100%",
   height: "100vh", // Full screen for cinematic feel
-  backgroundImage: "url('/IMG_4532.jpeg')",
+  backgroundImage: "url('/IMG_4538.webp')",
   backgroundSize: "cover",
   backgroundPosition: "center",
   display: "flex",
