@@ -53,7 +53,7 @@ export default function Home() {
         
         {/* NEXT.JS OPTIMIZED IMAGE COMPONENT (Chrome Speed Fix) */}
         <Image
-          src="/IMG_4532.webp" // Dhyan rahe public folder mein yehi naam ho
+          src="/IMG_4538.webp" // Dhyan rahe public folder mein yehi naam ho
           alt="Hospital Background"
           fill
           priority // Chrome ko order dega: "Sabse pehle ise load karo!"
