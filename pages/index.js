@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image"; // <-- Yeh naya jadoo add ho gaya hai
 import { motion } from "framer-motion";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
@@ -49,6 +50,16 @@ export default function Home() {
 
       {/* HERO SECTION - CINEMATIC LOOK */}
       <section style={heroSection}>
+        
+        {/* NEXT.JS OPTIMIZED IMAGE COMPONENT (Chrome Speed Fix) */}
+        <Image
+          src="/IMG_4532.webp" // Dhyan rahe public folder mein yehi naam ho
+          alt="Hospital Background"
+          fill
+          priority // Chrome ko order dega: "Sabse pehle ise load karo!"
+          style={{ objectFit: "cover", objectPosition: "center", zIndex: 0 }}
+        />
+
         <div style={heroOverlay}></div>
         
         {/* Floating Background Glow */}
@@ -99,6 +110,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+
       {/* STATS SECTION - GLASSMORPHISM CARDS */}
       <section style={sectionPadding}>
         <motion.div 
@@ -157,6 +169,7 @@ export default function Home() {
           ))}
         </motion.div>
       </section>
+
       {/* DOCTORS SECTION */}
       <section style={sectionPadding}>
         <div style={{ textAlign: "center", marginBottom: "50px" }}>
@@ -224,9 +237,8 @@ const sectionPadding = { padding: "100px 20px" };
 const heroSection = {
   position: "relative",
   height: "100vh",
-  backgroundImage: "url('/IMG_4532.jpeg')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
+  /* BACKGROUND CSS YAHAN SE HATA DIYA GAYA HAI SPEED KE LIYE */
+  backgroundColor: "#050b14", // Fallback color taaki black na dikhe
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -263,8 +275,8 @@ const heroText = { fontSize: "clamp(16px, 2vw, 20px)", color: "#aaa", marginBott
 const statsGrid = { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "25px", maxWidth: "1200px", margin: "0 auto" };
 
 const glassCard = {
-  background: "rgba(255, 255, 255, 0.03)",
-  backdropFilter: "blur(15px)",
+  background: "rgba(255, 255, 255, 0.05)", // Thoda bright kiya bina blur ke
+  /* backdropFilter: "blur(15px)", <-- YEH HATA DIYA SPEED KILLER THA */
   padding: "40px 20px",
   borderRadius: "24px",
   border: "1px solid rgba(255, 255, 255, 0.1)",
